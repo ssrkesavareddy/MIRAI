@@ -6,7 +6,7 @@ from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
 import time
 
-app1 = Flask(__name__)
+app = Flask(__name__)
 
 # Load the model and other necessary data
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -14,7 +14,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 with open('intents.json', 'r') as json_data:
     intents = json.load(json_data)
 
-FILE = r"C:\Users\ssrke\Chartbot\pythonProject1\.venv\New Text Document.txt"
+FILE = r"\New Text Document.txt"  # Provide the correct path to your file
 data = torch.load(FILE)
 
 input_size = data["input_size"]
@@ -61,9 +61,11 @@ def get_response(sentence):
                 return response
     else:
         return "I do not understand..."
+@app.route('/')
+def chatq():
+    return "helloworld"
 
-
-@app1.route('/chat')
+@app.route('/chat')
 def chat():
     user_input = request.args.get('input', '')
     response = get_response(user_input)
@@ -71,4 +73,4 @@ def chat():
 
 
 if __name__ == '__main__':
-    app1.run(debug=True)
+    app.run(debug=True)
