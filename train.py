@@ -124,7 +124,7 @@ data = {
     "tags": tags
 }
 
-FILE = r"C:\Users\ssrke\Chartbot\pythonProject1\.venv\New Text Document.txt"
+FILE = r"\New Text Document.txt"
 torch.save(data, FILE)
 
 print(f'training complete. file saved to {FILE}')
